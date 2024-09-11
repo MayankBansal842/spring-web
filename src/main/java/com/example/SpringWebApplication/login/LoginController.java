@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
+    private final AuthenticationService authenticationService;
+
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    public LoginController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
 //    @RequestMapping("/login")
 //    public String login() {
@@ -43,7 +49,11 @@ public class LoginController {
     public String goToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
         model.put("name", name);
         model.put("password", password);
-        return "welcome";
+        if (authenticationService.authenticate(name, password)) {
+            return "welcome";
+        } else {
+            return "login-form";
+        }
     }
 
 
