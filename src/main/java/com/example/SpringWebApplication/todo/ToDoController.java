@@ -30,20 +30,29 @@ public class ToDoController {
         return "toDos";
     }
     @GetMapping("add-to-do")
-    public String addToDoPage() {
+    public String addToDoPage(@SessionAttribute("name") String username, ModelMap modelMap) {
+        ToDo toDo = new ToDo(0,username,"",LocalDate.now().plusYears(1),false);
+        modelMap.put("toDo",toDo);
         return "addToDo";
     }
 
+//    Without direct bindings
+//    @PostMapping("add-to-do")
+//    public String addNewItemSubmit(
+//            @SessionAttribute("name") String username,
+//            @RequestParam String description,
+//            @RequestParam LocalDate dueDate,
+//            @RequestParam boolean completed,
+//            ModelMap modelMap) {
+//        toDoService.addToDo(username, description, dueDate, completed);
+//        return "redirect:/to-dos";
+//    }
+
+//    With binding
     @PostMapping("add-to-do")
-    public String addNewItemSubmit(
-            @SessionAttribute("name") String username,
-            @RequestParam String description,
-            @RequestParam LocalDate dueDate,
-            @RequestParam boolean completed,
-            ModelMap modelMap) {
-//        log.info((String)modelMap.get("name"));
-//        log.info("Username is : " + username);
-        toDoService.addToDo(username, description, dueDate, completed);
+    public String addNewItemSubmit(ModelMap modelMap, ToDo toDo, @SessionAttribute("name") String username) {
+        toDoService.addToDo(username,toDo.getDescription(),LocalDate.now().plusYears(1),false);
         return "redirect:/to-dos";
     }
+
 }

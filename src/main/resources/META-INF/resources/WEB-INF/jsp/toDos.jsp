@@ -30,7 +30,7 @@
                             <td>${todo.username}</td>
                             <td>${todo.description}</td>
                             <td>${todo.dueDate}</td>
-                            <td>${todo.completed}</td>
+                            <td>${todo.complete}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

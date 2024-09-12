@@ -8,15 +8,15 @@ public class ToDo {
     private String username;
     private String description;
     private LocalDate dueDate;
-    private boolean completed;
+    private boolean complete;
 
-    public ToDo(int id, String username, String description, LocalDate dueDate, boolean completed) {
+    public ToDo(int id, String username, String description, LocalDate dueDate, boolean complete) {
         super();
         this.id = id;
         this.username = username;
         this.description = description;
         this.dueDate = dueDate;
-        this.completed = completed;
+        this.complete = complete;
     }
 
     public int getId() {
@@ -51,16 +51,16 @@ public class ToDo {
         this.dueDate = dueDate;
     }
 
-    public boolean isCompleted() {
-        return completed;
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     @Override
     public String toString() {
-        return "Username : " + getUsername() + "\nDescription : " + getDescription() + "\nDueDate" + dueDate.toString() + "\nIs Completed: " + isCompleted();
+        return "Username : " + getUsername() + "\nDescription : " + getDescription() + "\nDueDate" + dueDate.toString() + "\nIs Completed: " + isComplete();
     }
 }
