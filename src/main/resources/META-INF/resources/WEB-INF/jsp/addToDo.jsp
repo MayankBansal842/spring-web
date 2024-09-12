@@ -22,7 +22,7 @@
         </div>
         <div>
             <label>Is Complete</label>
-            <select name="isComplete">
+            <select name="completed">
                 <option value="false" selected>Pending</option>
                 <option value="true">Complete</option>
             </select>

@@ -11,9 +11,9 @@ public class ToDoService {
     private static List<ToDo> todos = new ArrayList<>();
     private static int toDoCount=0;
     static {
-        todos.add(new ToDo(+toDoCount,"mayank", "Learn Spring", LocalDate.now().plusMonths(1),false));
-        todos.add(new ToDo(+toDoCount,"mayank", "Learn DevOps", LocalDate.now().plusMonths(12),false));
-        todos.add(new ToDo(+toDoCount,"mayank", "Learn AWS", LocalDate.now().plusMonths(3),false));
+        todos.add(new ToDo(++toDoCount,"mayank", "Learn Spring", LocalDate.now().plusMonths(1),false));
+        todos.add(new ToDo(++toDoCount,"mayank", "Learn DevOps", LocalDate.now().plusMonths(12),false));
+        todos.add(new ToDo(++toDoCount,"mayank", "Learn AWS", LocalDate.now().plusMonths(3),false));
 
     }
 
@@ -21,8 +21,8 @@ public class ToDoService {
         return todos;
     }
 
-    public void addToDo(String username, String description, LocalDate dueDate, boolean isCompleted) {
-        ToDo toDo = new ToDo(++toDoCount, username, description, dueDate, isCompleted);
+    public void addToDo(String username, String description, LocalDate dueDate, boolean isComplete) {
+        ToDo toDo = new ToDo(++toDoCount, username, description, dueDate, isComplete);
         todos.add(toDo);
     }
 }
