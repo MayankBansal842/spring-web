@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController  dont need request body with rest controller
+//@RestController  dont need response body with rest controller
 @Controller
 public class SayHelloController {
 
