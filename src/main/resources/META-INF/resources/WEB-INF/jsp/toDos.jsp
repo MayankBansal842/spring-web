@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="container">
+            <%@ include file="common/navbar.jspf" %>
             <div>Hello ${name}, Welcome to dos list</div>
             <div>Your ToDos are:</div>
             <%--${todos}--%>
