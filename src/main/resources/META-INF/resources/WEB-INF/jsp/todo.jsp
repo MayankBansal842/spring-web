@@ -15,8 +15,9 @@
             <form:form method="post" modelAttribute="todo">
                 Description:<form:input type="text" path="description" required="required"/>
                 <form:errors path="description" cssClass="text-warning"/>
+                <form:input path="username" type="hidden" />
                 <form:input type="hidden" path="id"/>
-                <form:input type="date" path="targetDate" />
+                <form:input type="hidden" path="targetDate" />
                 <form:input type="hidden" path="done"/>
                 <input type="submit" class="btn btn-success"/>
             </form:form>

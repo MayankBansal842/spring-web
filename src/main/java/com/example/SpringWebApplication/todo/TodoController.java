@@ -1,6 +1,8 @@
 package com.example.SpringWebApplication.todo;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,8 @@ import java.util.Optional;
 @Controller
 @SessionAttributes("name")
 public class TodoController {
+
+	private static final Logger log = LoggerFactory.getLogger(TodoController.class);
 
 	public TodoController(TodoService todoService) {
 		super();
@@ -66,8 +70,8 @@ public class TodoController {
 		if (optTodo.isPresent()) {
 			String username = (String) model.get("name");
 			Todo todo = optTodo.get();
+			log.info(todo.toString());
 			model.put("todo", todo);
-			todoService.deleteToDoById(id);
 			return "todo";
 		} else {
 			return "redirect:list-todos";
@@ -79,8 +83,7 @@ public class TodoController {
 		if (result.hasErrors()) {
 			return "todo";
 		}
-		String username = (String) model.get("name");
-		todoService.addTodo(username,todo.getDescription(),todo.getTargetDate(),todo.isDone());
+		todoService.editToDo(todo);
 		return "redirect:list-todos";
 	}
 }

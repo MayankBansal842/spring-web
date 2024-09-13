@@ -42,4 +42,9 @@ public class TodoService {
 		return todos.stream().filter(predicate).findFirst();
 	}
 
+	public void editToDo (Todo todo) {
+		deleteToDoById(todo.getId());
+		todos.add(todo);
+	}
+
 }
