@@ -3,6 +3,7 @@ package com.example.SpringWebApplication.todo;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,10 +29,9 @@ public class TodoController {
 
 	private TodoService todoService;
 
-
 	@RequestMapping("list-todos")
 	public String listAllTodos(ModelMap model) {
-		List<Todo> todos = todoService.findByUsername("mayank");
+		List<Todo> todos = todoService.findByUsername(getLoggedInUserName());
 		model.addAttribute("todos", todos);
 		return "toDos";
 	}
@@ -39,7 +39,7 @@ public class TodoController {
 	//GET, POST
 	@RequestMapping(value = "add-todo", method = RequestMethod.GET)
 	public String showNewTodoPage(ModelMap model) {
-		String username = (String) model.get("name");
+		String username = getLoggedInUserName();
 		Todo todo = new Todo(0, username, "", LocalDate.now().plusYears(1), false);
 		model.put("todo", todo);
 		return "todo";
@@ -52,7 +52,7 @@ public class TodoController {
 			return "todo";
 		}
 
-		String username = (String) model.get("name");
+		String username = getLoggedInUserName();
 		todoService.addTodo(username, todo.getDescription(),
 				LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos";
@@ -68,7 +68,6 @@ public class TodoController {
 	public String editToDo(@RequestParam int id, ModelMap model) {
 		Optional<Todo> optTodo = todoService.findById(id);
 		if (optTodo.isPresent()) {
-			String username = (String) model.get("name");
 			Todo todo = optTodo.get();
 			log.info(todo.toString());
 			model.put("todo", todo);
@@ -85,5 +84,9 @@ public class TodoController {
 		}
 		todoService.editToDo(todo);
 		return "redirect:list-todos";
+	}
+
+	public String getLoggedInUserName() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 }
