@@ -1,9 +1,15 @@
 package com.example.SpringWebApplication.todo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+//Entity will map class to a table in db , if no table exists then it will create one , could change table name by @Entity(name="name here")
+// we can prepopulate the table by adding a data.sql file in resourcces
+@Entity
 public class Todo {
 
 	public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
@@ -15,6 +21,8 @@ public class Todo {
 		this.done = done;
 	}
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String username;
 	
@@ -22,6 +30,9 @@ public class Todo {
 	private String description;
 	private LocalDate targetDate;
 	private boolean done;
+
+	public Todo() {
+	}
 
 	public int getId() {
 		return id;
